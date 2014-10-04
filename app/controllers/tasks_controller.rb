@@ -80,6 +80,14 @@ class TasksController < ApplicationController
 	render :json => {:status => "Complete"}
   end
 
+  # POST /tasks/1/unarchiver
+  def unarchiver
+	change = Task.find_by(id: params[:id])
+	change.archived = 'f'
+	change.save
+	render :json => {:status => "Complete"}
+  end
+
 
   # DELETE /tasks/1
   # DELETE /tasks/1.json

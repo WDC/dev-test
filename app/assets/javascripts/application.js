@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//requireturbolinks
 //= require_tree .
 
 $(document).ready(function (event) {
@@ -27,19 +27,41 @@ $('.complete').click(function (event){
 	}
 	$.ajax({
 		url: '/tasks/'+ id +'/marker.json',
+		context: this,
 		type: "POST",
 		data: {
 			complete: task
 		},
-		dataType: 'json'
+		dataType: 'json',
+		
 	});
 });
 
 $('.archive').click(function(event){
+	event.preventDefault();
 	var id = $(this).data('id');
 	$.ajax({
 		url: '/tasks/'+ id +'/archiver.json',
-		type: "POST"
+		context: this,
+		type: "POST",
+		success: function (resp) {
+			$(this).parent('td').parent('tr').fadeOut(300,function() { $("#notification").remove(); });
+		}
 	});
 });
+
+
+$('.unarchive').click(function(event){
+	event.preventDefault();
+	var id = $(this).data('id');
+	$.ajax({
+		url: '/tasks/'+ id +'/unarchiver.json',
+		context: this,
+		type: "POST",
+		success: function (resp) {
+			$(this).parent('td').parent('tr').fadeOut(300,function() { $("notification").remove(); });
+		}
+	});
+});
+
 });

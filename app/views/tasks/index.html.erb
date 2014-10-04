@@ -45,7 +45,11 @@
               <td>
                 <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-default btn-sm' %>
                 <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+<% if task.archived == true %>
+                <%= link_to 'Unarchive', '#', :data => {:id => task.id}, class: 'btn btn-info btn-sm unarchive' %>
+<% else %>
                 <%= link_to 'Archive', '#', :data => {:id => task.id}, class: 'btn btn-warning btn-sm archive' %>
+<% end %>
               </td>
             </tr>
           <% end %>
