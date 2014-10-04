@@ -17,4 +17,29 @@
 
 $(document).ready(function (event) {
   $(document).trigger('page:load');
-})
+$('.complete').click(function (event){
+	var id = $(this).data('id');
+	if($(this).attr('checked')){
+		var task = "f";
+	}
+	else {
+		var task = "t";
+	}
+	$.ajax({
+		url: '/tasks/'+ id +'/marker.json',
+		type: "POST",
+		data: {
+			complete: task
+		},
+		dataType: 'json'
+	});
+});
+
+$('.archive').click(function(event){
+	var id = $(this).data('id');
+	$.ajax({
+		url: '/tasks/'+ id +'/archiver.json',
+		type: "POST"
+	});
+});
+});

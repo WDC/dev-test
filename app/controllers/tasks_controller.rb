@@ -49,6 +49,7 @@ class TasksController < ApplicationController
     end
   end
 
+
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
@@ -62,6 +63,23 @@ class TasksController < ApplicationController
       end
     end
   end
+
+  # POST /tasks/1/marker
+  def marker
+	change = Task.find_by(id: params[:id])
+	change.complete = params[:complete]
+	change.save
+	render :json => {:status => "Complete"}
+  end
+
+  # POST /tasks/1/archiver
+  def archiver
+	change = Task.find_by(id: params[:id])
+	change.archived = 't'
+	change.save
+	render :json => {:status => "Complete"}
+  end
+
 
   # DELETE /tasks/1
   # DELETE /tasks/1.json
