@@ -1,4 +1,11 @@
 class Task < ActiveRecord::Base
+	
+	belongs_to :users
+	def defaults
+#		self.complete = false
+#		self.archived = false
+	end
+	after_initialize :defaults
   {
     complete: { completed: true, incomplete: false },
     archived: { archived: true, unarchived: false }

@@ -10,6 +10,16 @@ form#new_task, form.edit_task {
   }
 }
 
+.centered {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buttons {
+	width: 250px;
+}
+
 a {
   color: darkblue;
 
@@ -18,6 +28,10 @@ a {
     background-color: transparent;
     text-decoration: none;
   }
+}
+
+tr.completed {
+	text-decoration: line-through;
 }
 
 .panel {

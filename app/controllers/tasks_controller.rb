@@ -72,6 +72,7 @@ class TasksController < ApplicationController
 	render :json => {:status => "Complete"}
   end
 
+  # Archives task with ID parameter
   # POST /tasks/1/archiver
   def archiver
 	change = Task.find_by(id: params[:id])
@@ -80,6 +81,7 @@ class TasksController < ApplicationController
 	render :json => {:status => "Complete"}
   end
 
+  # Unarchives task with ID parameter
   # POST /tasks/1/unarchiver
   def unarchiver
 	change = Task.find_by(id: params[:id])
