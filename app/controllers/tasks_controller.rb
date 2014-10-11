@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   # GET /tasks
   # GET /tasks.json
+ 
   def index
     @task = Task.new
 
@@ -69,6 +70,16 @@ class TasksController < ApplicationController
 	change = Task.find_by(id: params[:id])
 	change.complete = params[:complete]
 	change.save
+twitter = Twitter::REST::Client.new do |config|
+  config.consumer_key = ENV['CONSUMER_KEY']
+  config.consumer_secret = ENV['CONSUMER_KEY_SECRET']
+  config.access_token = ENV['ACCESS_TOKEN']
+  config.access_token_secret = ENV['ACCESS_TOKEN_SECRET']
+end
+    # Uncomment following line to activate Twitter psoting. This is on my live Twitter account, because I was unable to post to a new one wwithout an additional phone number.
+    if params[:complete] == 't'
+    twitter.update(change.title + ' has been completetd.')
+    end
 	render :json => {:status => "Complete"}
   end
 
